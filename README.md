@@ -2,7 +2,7 @@
 
 This mostly use for java's properties file editing wihtin Sublime Text 2
 
-#### manu
+#### Menu
 
 Edit -- Unicode To String
 
