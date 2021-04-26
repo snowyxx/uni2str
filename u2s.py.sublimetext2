@@ -4,7 +4,7 @@ import sublime
 import sublime_plugin
 
 
-class UnicodeToStringCommand(sublime_plugin.TextCommand):
+class UnicodeToString(sublime_plugin.TextCommand):
 
     def run(self, edit):
         error = ''
@@ -43,9 +43,8 @@ class UnicodeToStringCommand(sublime_plugin.TextCommand):
             s = s.replace(r'\"', r'\\"')
             s = s.replace(r'\u0020', r'BLANK!@#SPACE')
             try:
-                # s = s.decode("unicode-escape") # python 2 for sublime text 2
-                s = s.encode().decode("unicode-escape") # python 3 for sublime text 3
-            except Exception as e:
+                s = s.decode("unicode-escape")
+            except Exception, e:
                 error += str(e) + '--' + self.view.substr(region)+'\n'
             if line_continuation_character:
                 s += '\\'
@@ -56,7 +55,7 @@ class UnicodeToStringCommand(sublime_plugin.TextCommand):
             sublime.error_message(error)
 
 
-class StringToUnicodeCommand(sublime_plugin.TextCommand):
+class StringToUnicode(sublime_plugin.TextCommand):
 
     def run(self, edit):
         error = ''
@@ -74,9 +73,8 @@ class StringToUnicodeCommand(sublime_plugin.TextCommand):
                     if ord(ss) > 127:
                         ss = ss.encode("unicode-escape")
                     sl.append(ss)
-                sl_str = [x.decode('utf-8')for x in sl] # for python 3 of sublime text 3
-                s = ''.join(sl_str)
-            except Exception as e:
+                s = ''.join(sl)
+            except Exception, e:
                 error += str(e) + '--' + self.view.substr(region)+r'\n'
             self.view.replace(edit, region, s)
         if error != '':

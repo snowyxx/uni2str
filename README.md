@@ -1,6 +1,8 @@
-### A plugin for Sublime Text 2 to convert between unicoce and string
+### A plugin for Sublime Text 3 to convert between unicoce and string
 
-This mostly use for java's properties file editing wihtin Sublime Text 2
+This mostly use for java's properties file editing wihtin Sublime Text 3
+
+For Sublime Text 2, `mv u2s.py.sublimetext2 u2s.py`
 
 #### Menu
 
@@ -16,9 +18,11 @@ Edit -- String To Unicode     ctrl+shift+=
 
 #### Install
 
-You can also install this package manually by entering the Packages directory of Sublime Text 2 and issuing on a terminal:
+You can also install this package manually by entering the Packages directory of Sublime Text 3 and issuing on a terminal:
 
-**Only for Sublime Text 2**
+For Sublime Text 2, `mv u2s.py.sublimetext2 u2s.py`
+
+**Only for Sublime Text 3**
 
     git clone https://github.com/snowyxx/uni2str.git
 
