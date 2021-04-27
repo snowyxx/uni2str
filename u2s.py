@@ -44,6 +44,13 @@ class UnicodeToStringCommand(sublime_plugin.TextCommand):
             s = s.replace(r'\u0020', r'BLANK!@#SPACE')
             try:
                 # s = s.decode("unicode-escape") # python 2 for sublime text 2
+                sl = []
+                for ss in s:
+                    if ord(ss) > 127:
+                        ss = ss.encode("unicode-escape")
+                    sl.append(ss)
+                sl_str = [x.decode('utf-8') if type(x)!=str else x for x in sl] # for python 3 of sublime text 3
+                s = ''.join(sl_str)
                 s = s.encode().decode("unicode-escape") # python 3 for sublime text 3
             except Exception as e:
                 error += str(e) + '--' + self.view.substr(region)+'\n'
@@ -74,7 +81,7 @@ class StringToUnicodeCommand(sublime_plugin.TextCommand):
                     if ord(ss) > 127:
                         ss = ss.encode("unicode-escape")
                     sl.append(ss)
-                sl_str = [x.decode('utf-8')for x in sl] # for python 3 of sublime text 3
+                sl_str = [x.decode('utf-8') if type(x)!=str else x for x in sl] # for python 3 of sublime text 3
                 s = ''.join(sl_str)
             except Exception as e:
                 error += str(e) + '--' + self.view.substr(region)+r'\n'
